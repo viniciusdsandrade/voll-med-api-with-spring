@@ -1,0 +1,137 @@
+*MEDICO*
+POST    http://localhost:8080/api/v1/medicos
+GET     http://localhost:8080/api/v1/medicos
+GET     http://localhost:8080/api/v1/medicos/{{id}}
+PUT     http://localhost:8080/api/v1/medicos
+DELETE  http://localhost:8080/api/v1/medicos/{{id}}
+
+*PACIENTE*
+POST    http://localhost:8080/api/v1/pacientes
+GET     http://localhost:8080/api/v1/pacientes
+GET     http://localhost:8080/api/v1/pacientes/{{id}}
+PUT     http://localhost:8080/api/v1/pacientes
+DELETE  http://localhost:8080/api/v1/pacientes/{{id}}
+
+*CONSULTA*
+POST    http://localhost:8080/api/v1/consulta
+GET     http://localhost:8080/api/v1/consulta
+GET     http://localhost:8080/api/v1/consulta/{{id}}
+
+*LOGIN*
+POST    http://localhost:8080/login
+
+
+
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "login": "vinicius_andrade2010@hotmail.com",
+  "senha": "123456"
+}
+
+
+###
+POST http://localhost:8080/api/v1/medicos
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+
+{
+  "nome": "Dr. Andrade",
+  "email": "vinicius_andrade2010@hotmail.com",
+  "crm": "130820",
+  "especialidade": "GINECOLOGIA",
+  "telefone": "19974133884",
+  "endereco": {
+    "logradouro": "Rua Orlando de Oliveira",
+    "bairro": "Jardim São Marcos",
+    "cep": "13082-205",
+    "cidade": "Campinas",
+    "uf": "RJ",
+    "numero": "375"
+  }
+}
+
+###
+GET http://localhost:8080/api/v1/medicos
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+
+###
+GET http://localhost:8080/api/v1/medicos/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+
+###
+PUT http://localhost:8080/api/v1/medicos
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+DELETE http://localhost:8080/api/v1/medicos/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+POST http://localhost:8080/api/v1/pacientes
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+{
+  "nome": "Vinícius Andrade",
+  "email": "viniciusdsandrade0662@gmail.com",
+  "telefone": "19974133884",
+  "cpf": "44784160876",
+  "endereco": {
+    "logradouro": "Rua Orlando de Oliveira",
+    "bairro": "Jardim São Marcos",
+    "cep": "13082-205",
+    "cidade": "Campinas",
+    "uf": "SP",
+    "numero": "375"
+  }
+}
+
+###
+GET http://localhost:8080/api/v1/pacientes
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+GET http://localhost:8080/api/v1/pacientes/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+<> 2024-01-30T221145.200.json
+
+###
+DELETE http://localhost:8080/api/v1/pacientes/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+GET http://localhost:8080/api/v1/usuarios
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+POST http://localhost:8080/api/v1/consulta
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+{
+  "idPaciente": 1,
+  "idMedico": 1,
+  "dataHora": "17/02/2024 09:10"
+}
+
+###
+DELETE http://localhost:8080/api/v1/consulta
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+###
+GET http://localhost:8080/api/v1/consulta
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
+
+
+###
+GET http://localhost:8080/api/v1/consulta/8
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aW5pY2l1c19hbmRyYWRlMjAxMEBob3RtYWlsLmNvbSIsImlzcyI6IkFQSSBWb2xsLm1lZCIsImlkIjoxLCJleHAiOjE3MzgxOTk0MzF9.S-oeA11DryMTNfrOCt3Ir5D8mn-cJtRq8GOPqJvYHRY
