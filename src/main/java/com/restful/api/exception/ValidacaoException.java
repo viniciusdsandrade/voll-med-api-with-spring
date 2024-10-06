@@ -1,13 +1,14 @@
 package com.restful.api.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 /**
  * Exceção lançada quando ocorre uma validação de entrada inválida.
  * Esta exceção é geralmente lançada quando os dados de entrada não atendem aos critérios de validação esperados.
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(BAD_REQUEST)
 public class ValidacaoException extends RuntimeException {
 
     /**

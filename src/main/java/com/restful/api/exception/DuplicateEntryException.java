@@ -1,13 +1,14 @@
 package com.restful.api.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import static org.springframework.http.HttpStatus.CONFLICT;
 
 /**
  * Exceção lançada quando ocorre uma tentativa de adicionar uma entrada duplicada.
  * Esta exceção é geralmente lançada em operações de inserção em que a entrada já existe.
  */
-@ResponseStatus(HttpStatus.CONFLICT)
+@ResponseStatus(CONFLICT)
 public class DuplicateEntryException extends RuntimeException {
 
     /**

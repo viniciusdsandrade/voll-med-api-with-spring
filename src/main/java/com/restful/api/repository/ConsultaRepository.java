@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
-@Repository
+@Repository("consultaRepository")
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
     /**

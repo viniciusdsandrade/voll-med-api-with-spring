@@ -4,9 +4,13 @@ import com.restful.api.dto.paciente.DadosAtualizacaoPaciente;
 import com.restful.api.dto.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -44,9 +48,9 @@ public class Paciente {
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-        if (dados.nome() != null) this.nome = dados.nome();
-        if (dados.telefone() != null) this.telefone = dados.telefone();
-        if (dados.endereco() != null) this.endereco.atualizarInformacoes(dados.endereco());
+        ofNullable(dados.nome()).ifPresent(value -> this.nome = value);
+        ofNullable(dados.telefone()).ifPresent(value -> this.telefone = value);
+        ofNullable(dados.endereco()).ifPresent(value -> this.endereco.atualizarInformacoes(value));
     }
 
     public void excluir() {
@@ -56,14 +60,29 @@ public class Paciente {
     @Override
     public String toString() {
         return "{\n" +
-                "    \"id\": " + id + ",\n" +
-                "    \"nome\": \"" + nome + "\",\n" +
-                "    \"telefone\": \"" + telefone + "\",\n" +
-                "    \"email\": \"" + email + "\",\n" +
-                "    \"cpf\": \"" + cpf + "\",\n" +
-                "    \"ativo\": " + ativo + ",\n" +
-                "    \"endereco\": " + endereco.toString() + "\n" +
-                "}";
+               "    \"id\": " + id + ",\n" +
+               "    \"nome\": \"" + nome + "\",\n" +
+               "    \"telefone\": \"" + telefone + "\",\n" +
+               "    \"email\": \"" + email + "\",\n" +
+               "    \"cpf\": \"" + cpf + "\",\n" +
+               "    \"ativo\": " + ativo + ",\n" +
+               "    \"endereco\": " + endereco.toString() + "\n" +
+               "}";
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Paciente paciente = (Paciente) o;
+        return getId() != null && Objects.equals(getId(), paciente.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }

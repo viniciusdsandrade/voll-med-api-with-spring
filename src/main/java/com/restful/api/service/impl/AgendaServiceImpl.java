@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("agendaService")
 public class AgendaServiceImpl implements AgendaService {
 
     private final ConsultaRepository consultaRepository;

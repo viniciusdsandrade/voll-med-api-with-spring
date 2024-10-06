@@ -8,8 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.proxy.HibernateProxy;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -52,12 +56,28 @@ public class Medico {
     }
 
     public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
-        if (dados.nome() != null) this.nome = dados.nome();
-        if (dados.telefone() != null) this.telefone = dados.telefone();
-        if (dados.endereco() != null) this.endereco.atualizarInformacoes(dados.endereco());
+        ofNullable(dados.nome()).ifPresent(value -> this.nome = value);
+        ofNullable(dados.telefone()).ifPresent(value -> this.telefone = value);
+        ofNullable(dados.endereco()).ifPresent(value -> this.endereco.atualizarInformacoes(value));
     }
 
     public void excluir() {
         this.ativo = false;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Medico medico = (Medico) o;
+        return getId() != null && Objects.equals(getId(), medico.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
-@Repository
+@Repository("medicoRepository")
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
     /**
      * Busca uma página de médicos ativos.

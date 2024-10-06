@@ -12,7 +12,11 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-@Service
+import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
+import static java.time.LocalDateTime.now;
+import static java.time.ZoneId.systemDefault;
+
+@Service("tokenService")
 public class TokenService {
 
     private static final String ISSUER = "API Voll.med";
@@ -24,7 +28,7 @@ public class TokenService {
 
         System.out.println("secret: " + secret);
         try {
-            var algorithm = Algorithm.HMAC256(secret);
+            var algorithm = HMAC256(secret);
             return JWT.create()
                     .withIssuer(ISSUER)
                     .withSubject(usuario.getLogin())
@@ -38,7 +42,7 @@ public class TokenService {
 
     public String getSubject(String token) {
         try {
-            var algorithm = Algorithm.HMAC256(secret);
+            var algorithm = HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer(ISSUER)
                     .build()
@@ -50,6 +54,6 @@ public class TokenService {
     }
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().plusDays(365).atZone(ZoneId.systemDefault()).toInstant();
+        return now().plusDays(365).atZone(systemDefault()).toInstant();
     }
 }
