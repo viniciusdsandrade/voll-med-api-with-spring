@@ -2,7 +2,6 @@ package com.restful.api.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.proxy.HibernateProxy;
@@ -13,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,8 +29,7 @@ import java.util.Objects;
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String login;
     private String senha;
@@ -73,8 +73,15 @@ public class Usuario implements UserDetails {
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+
+        Class<?> oEffectiveClass = o instanceof HibernateProxy
+                ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+                : o.getClass();
+
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
+                : this.getClass();
+
         if (thisEffectiveClass != oEffectiveClass) return false;
 
         Usuario that = (Usuario) o;
@@ -88,5 +95,14 @@ public class Usuario implements UserDetails {
         return this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
                 : getClass().hashCode();
+    }
+
+    @Override
+    public final String toString() {
+        return "{\n" +
+               "\t\t\"id\": " + id + ",\n" +
+               "\t\t\"login\": \"" + login + "\",\n" +
+               "\t\t\"senha\": \"" + senha + "\"\n" +
+               "\t}";
     }
 }

@@ -4,7 +4,6 @@ import com.restful.api.repository.UsuarioRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -46,9 +45,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recuperarToken(HttpServletRequest request) {
         var authorization = request.getHeader("Authorization");
-        if (authorization != null) {
-            return authorization.replace("Bearer ", "").trim();
-        }
+        if (authorization != null) return authorization.replace("Bearer ", "").trim();
 
         return null;
     }

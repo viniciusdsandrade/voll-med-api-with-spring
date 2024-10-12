@@ -6,17 +6,21 @@ import com.restful.api.dto.consulta.DadosDetalhamentoConsulta;
 import com.restful.api.entity.Consulta;
 import com.restful.api.exception.ValidacaoException;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Schema(name = "AgendaService")
 public interface AgendaService {
 
-    DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) throws ValidacaoException;
+    @Transactional
+    DadosDetalhamentoConsulta agendar(@Valid DadosAgendamentoConsulta dados) throws ValidacaoException;
 
     Page<DadosDetalhamentoConsulta> listar(Pageable paginacao);
 
-    void cancelar(DadosCancelamentoConsulta dados) throws ValidacaoException;
+    @Transactional
+    void cancelar(@Valid DadosCancelamentoConsulta dados) throws ValidacaoException;
 
     Consulta buscarPorId(Long id);
 }

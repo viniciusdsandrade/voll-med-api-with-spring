@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     /**
-     * Retorna uma página de pacientes ativos de acordo com a paginação fornecida.
+     * Retorna uma página de pacientes ativos conforme a paginação fornecida.
      *
      * @param paginacao As informações de paginação para a consulta.
      * @return Uma página de pacientes ativos.
@@ -41,9 +41,9 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
      * @return True se o paciente estiver ativo, false caso contrário.
      */
     @Query("""
-                SELECT p.ativo 
-                FROM Paciente p 
-                WHERE p.id = :idPaciente
+                 SELECT p.ativo
+                 FROM Paciente p
+                 WHERE p.id = :idPaciente
             """)
     boolean findAtivoById(Long idPaciente);
 }

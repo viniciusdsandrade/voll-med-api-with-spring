@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Repository("medicoRepository")
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
+
     /**
      * Busca uma página de médicos ativos.
      *
@@ -66,8 +67,8 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
      * @return True se o médico estiver ativo, caso contrário False.
      */
     @Query("""
-            SELECT m.ativo 
-            FROM Medico m 
+            SELECT m.ativo
+            FROM Medico m
             WHERE m.id = :idMedico
         """)
     Boolean findAtivoById(Long idMedico);

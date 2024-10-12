@@ -4,12 +4,11 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.License;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Spring Voll Med API",
-                description = "API Restful para gerenciamento de consultas médicas.",
+                title = "Voll Med",
+                description = "API RestFul para gerenciamento de consultas médicas.",
                 termsOfService = "https://github.com/viniciusdsandrade/voll-med-api-with-spring",
                 contact = @Contact(
                         name = "Vinícius dos Santos Andrade",
@@ -20,7 +19,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
                         name = "MIT License",
                         url = "https://opensource.org/licenses/MIT"
                 ),
-                version = "v1.0.0"
+                version = "v2.0.0"
         )
 )
-public class SwaggerConfig { }
+public class SwaggerConfig {
+}

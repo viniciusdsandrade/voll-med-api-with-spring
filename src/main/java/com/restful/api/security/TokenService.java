@@ -1,7 +1,6 @@
 package com.restful.api.security;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.restful.api.entity.Usuario;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
 import static java.time.LocalDateTime.now;

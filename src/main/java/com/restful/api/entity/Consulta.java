@@ -12,8 +12,8 @@ import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Entity(name = "Consulta")
@@ -25,7 +25,6 @@ public class Consulta {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -38,8 +37,8 @@ public class Consulta {
 
     private LocalDateTime dataHora;
 
-    @Column(name = "motivo_cancelamento")
     @Enumerated(STRING)
+    @Column(name = "motivo_cancelamento")
     private MotivoCancelamento motivoCancelamento;
 
     public void cancelar(MotivoCancelamento motivo) {
@@ -50,11 +49,21 @@ public class Consulta {
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+
+        Class<?> oEffectiveClass = o instanceof HibernateProxy
+                ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+                : o.getClass();
+
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
+                : this.getClass();
+
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Consulta consulta = (Consulta) o;
-        return getId() != null && Objects.equals(getId(), consulta.getId());
+
+        Consulta that = (Consulta) o;
+
+        return this.getId() != null &&
+               Objects.equals(this.getId(), that.getId());
     }
 
     @Override
@@ -62,5 +71,16 @@ public class Consulta {
         return this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
                 : getClass().hashCode();
+    }
+
+    @Override
+    public final String toString() {
+        return "{\n" +
+               "\t\t\"id\": " + id + ",\n" +
+               "\t\t\"medico\": " + (medico != null ? medico.toString() : "null") + ",\n" +
+               "\t\t\"paciente\": " + (paciente != null ? paciente.toString() : "null") + ",\n" +
+               "\t\t\"dataHora\": \"" + dataHora + "\",\n" +
+               "\t\t\"motivoCancelamento\": \"" + (motivoCancelamento != null ? motivoCancelamento : "null") + "\"\n" +
+               "\t}";
     }
 }
