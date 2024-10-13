@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Schema(description = "Modelo de dados para endereço")
-public record DadosEndereco(
+public record DadosCadastroEndereco(
 
         @NotBlank(message = "O logradouro não pode ser nulo")
         @Schema(description = "Logradouro do endereço")

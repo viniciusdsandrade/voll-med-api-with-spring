@@ -58,33 +58,62 @@ public class Paciente {
         this.ativo = false;
     }
 
+    /**
+     * Sobrescreve o metodo {@code equals(Object o)} para comparar entidades do tipo {@code Paciente} levando em conta proxies do Hibernate.
+     * <p>
+     * Este metodo garante que a comparação entre duas instâncias de {@code Paciente} seja realizada corretamente,
+     * mesmo se uma ou ambas as instâncias forem proxies gerados pelo Hibernate. Ele compara as classes efetivas
+     * das instâncias e, se forem da mesma classe, verifica a igualdade com base no ID da entidade.
+     *
+     * @param o O objeto a ser comparado com a instância atual.
+     * @return {@code true} se as instâncias forem consideradas iguais; {@code false} caso contrário.
+     */
     @Override
     public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
+        if (this == o) return true; // Verifica se o objeto atual é o mesmo que está sendo comparado
+        if (o == null) return false; // Verifica se o objeto comparado é nulo
 
-        // Verifica se o objeto é um proxy do Hibernate e obtém a classe efetiva
+        // Verifica se o objeto passado é um proxy do Hibernate e obtém a classe efetiva
         Class<?> oEffectiveClass = o instanceof HibernateProxy
                 ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
-                : o.getClass();
+                : o.getClass(); // Se não for proxy, usa a classe do objeto diretamente
 
+        // Obtém a classe efetiva da instância atual (se for proxy, pega a classe real)
         Class<?> thisEffectiveClass = this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
-                : this.getClass();
+                : this.getClass(); // Se não for proxy, usa a classe da própria instância
 
-        // Se as classes efetivas forem diferentes, retorna false
+        // Compara as classes efetivas; se forem diferentes, as entidades não são iguais
         if (thisEffectiveClass != oEffectiveClass) return false;
 
+        // Faz o cast do objeto para a classe Paciente para acessar seu ID
         Paciente that = (Paciente) o;
 
+        // Verifica se o ID não é nulo e se os IDs são iguais
         return this.getId() != null &&
                Objects.equals(this.getId(), that.getId());
     }
 
+    /**
+     * Sobrescreve o metodo {@code hashCode()} para lidar com proxies do Hibernate na entidade {@code Paciente}.
+     * <p>
+     * Este metodo garante que o código hash da entidade {@code Paciente} seja calculado corretamente, tanto
+     * no caso de a entidade ser um proxy gerado pelo Hibernate (para lazy loading), quanto no caso de ser
+     * a instância direta da entidade. Isso é importante para garantir a consistência em coleções que dependem
+     * do código hash, como {@code HashSet} e {@code HashMap}.
+     *
+     * @return O código hash da classe da entidade ou da classe persistente em caso de proxy.
+     */
     @Override
     public final int hashCode() {
+
+        // Verifica se a instância atual é um proxy gerado pelo Hibernate
         return this instanceof HibernateProxy
+
+                // Se for um proxy, obtém a classe persistente real e retorna seu hashCode
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
+
+                // Se não for um proxy, retorna o hashCode da classe da própria instância
                 : getClass().hashCode();
     }
 

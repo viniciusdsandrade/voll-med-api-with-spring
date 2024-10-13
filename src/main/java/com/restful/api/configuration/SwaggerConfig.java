@@ -5,6 +5,18 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.License;
 
+/**
+ * Configuração do Swagger para documentação da API RESTFul.
+ * <p>
+ * Esta classe define as configurações de metadados do Swagger/OpenAPI, como o título, descrição,
+ * termos de uso, informações de contato, licença, e versão da API.
+ * <p>
+ * O Swagger facilita a visualização e interação com os endpoints da API, gerando uma
+ * documentação interativa que pode ser acessada via uma interface web.
+ *
+ * @see io.swagger.v3.oas.annotations.OpenAPIDefinition
+ * @see io.swagger.v3.oas.annotations.info.Info
+ */
 @OpenAPIDefinition(
         info = @Info(
                 title = "Voll Med",
