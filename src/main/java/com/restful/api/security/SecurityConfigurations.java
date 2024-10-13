@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 /**
@@ -61,19 +63,24 @@ public class SecurityConfigurations {
      * @return Uma instância de SecurityFilterChain contendo as configurações de segurança.
      * @throws Exception Pode lançar exceções relacionadas à configuração de segurança.
      */
+
     @Bean("securityFilterChain")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/login").permitAll();
+                    // Permitir acesso ao Swagger e à documentação da API sem autenticação
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    req.requestMatchers("/api/v1/medicos").permitAll(); // Permite listar médicos sem autenticação
-                    req.anyRequest().authenticated();
+                    req.requestMatchers("/login").permitAll(); // Permitir acesso à página de login sem autenticação
+                    req.requestMatchers(GET, "/api/v1/medicos").permitAll(); // Permitir listagem de médicos
+                    req.requestMatchers(DELETE, "/pacientes").hasRole("ADMIN");
+                    req.requestMatchers(DELETE, "/medicos").hasRole("ADMIN");
+                    req.anyRequest().authenticated(); // Qualquer outra requisição exige autenticação
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
     /**
      * Define o gerenciador de autenticação que será utilizado na aplicação.

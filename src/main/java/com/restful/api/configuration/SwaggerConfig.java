@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.License;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuração do Swagger para documentação da API RESTFul.
@@ -17,11 +18,12 @@ import io.swagger.v3.oas.annotations.info.License;
  * @see io.swagger.v3.oas.annotations.OpenAPIDefinition
  * @see io.swagger.v3.oas.annotations.info.Info
  */
+@Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Voll Med",
+                title = "Voll Med API",
                 description = "API RestFul para gerenciamento de consultas médicas.",
-                termsOfService = "https://github.com/viniciusdsandrade/voll-med-api-with-spring",
+                version = "v2.0.0",
                 contact = @Contact(
                         name = "Vinícius dos Santos Andrade",
                         email = "vinicius_andrade2010@hotmail.com",
@@ -30,8 +32,7 @@ import io.swagger.v3.oas.annotations.info.License;
                 license = @License(
                         name = "MIT License",
                         url = "https://opensource.org/licenses/MIT"
-                ),
-                version = "v2.0.0"
+                )
         )
 )
 public class SwaggerConfig {
