@@ -3,7 +3,6 @@ package com.restful.api.configuration;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -24,14 +23,11 @@ import org.springframework.context.annotation.Configuration;
                 title = "Voll Med API",
                 description = "API RestFul para gerenciamento de consultas médicas.",
                 version = "v2.0.0",
+                termsOfService = "https://github.com/viniciusdsandrade/voll-med-api-with-spring", // Repositório da aplicação
                 contact = @Contact(
                         name = "Vinícius dos Santos Andrade",
                         email = "vinicius_andrade2010@hotmail.com",
                         url = "https://www.linkedin.com/in/viniciusdsandrade"
-                ),
-                license = @License(
-                        name = "MIT License",
-                        url = "https://opensource.org/licenses/MIT"
                 )
         )
 )
